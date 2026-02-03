@@ -4,7 +4,9 @@
 
 - Monolith applications are one big self contained unit that contain all the logic of the application. 
 - They are hard to scale, update and maintain and can prove to be problematic pretty soon. 
-￼
+
+<img width="487" height="689" alt="Monolith Application" src="https://github.com/user-attachments/assets/efb2f102-33c2-45ba-89ba-df4d72e419c6" />
+
 # Benefits 
 - Easier to develop and deploy initially 
 - Limited scaling 
@@ -19,7 +21,10 @@ Micro-services distribute the applications into key components  - each component
 - Built around business capabilities and split around business functions they performs. 
 - Design is as independent as possible - each service has its own code base, data storage and deployment pipelines. 
 - Systems are easier to understand and change. 
-- You cannot just split up a monolith application into small components - it requires careful design. 
+- You cannot just split up a monolith application into small components - it requires careful design.
+
+<img width="902" height="813" alt="Microservice" src="https://github.com/user-attachments/assets/c48dbee5-7315-427c-abe4-d0407649be2c" />
+
 # Benefits:
     - Faster development 
     - Independent scaling 
@@ -72,8 +77,6 @@ Application of loose coupling, clear separation of concerns and well defined int
     3. It can be deployed independently without affecting other systems. 
     4. This allows the team to iterate and release features without the need of coordination or wait for system wide deployments. 
 <img width="1300" height="949" alt="Repository" src="https://github.com/user-attachments/assets/c1df2e4a-7cda-482b-9eab-7d1a3d2339ab" />
-<img width="1300" height="949" alt="Repository" src="https://github.com/user-attachments/assets/c1df2e4a-7cda-482b-9eab-7d1a3d2339ab" />
-
 
 ## Common Pitfalls in designing micro services. 
 
