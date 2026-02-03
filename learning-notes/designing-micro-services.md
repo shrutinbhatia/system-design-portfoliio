@@ -4,7 +4,6 @@
 
 - Monolith applications are one big self contained unit that contain all the logic of the application. 
 - They are hard to scale, update and maintain and can prove to be problematic pretty soon. 
-
 ￼
 # Benefits 
 - Easier to develop and deploy initially 
@@ -35,9 +34,6 @@ Micro-services distribute the applications into key components  - each component
     - Data Consistency issues 
 
 
-
-
-
 ## Factors influencing the choice of architecture 
 
 1. Application size and complexity 
@@ -48,16 +44,16 @@ Micro-services distribute the applications into key components  - each component
 ## Demystifying Assumptions: 
 
 1. One shared database in micro services 
-    1. Introduces tight coupling 
-    2. Potential bottlenecks 
+    1. This introduces tight coupling 
+    2. Potential bottlenecks on the database level
 2. Infinitely scalable 
-    1. They are better at scaling than monoliths but they still have scaling limits 
-    2. Bad design can still cause scaling issues 
-    3. Management and orchestration complexity impacts scaling  
+    1. Microservices are better at scaling than monoliths but they still have scaling limits 
+    2. Bad design can still cause scaling issues.
+    3. Management and orchestration complexity impacts scaling.  
 3. Micros ervices eliminates single point of failure. 
     1. Failure in one service can impact others using it. A central service can create bottlenecks. 
 
-Application of loose coupling , clear separation of concerns and well defined interfaces are keys to built robust application. 
+Application of loose coupling, clear separation of concerns and well defined interfaces are keys to built robust application. 
 
 	
 ## Key Micro services Design principles. 
@@ -75,6 +71,8 @@ Application of loose coupling , clear separation of concerns and well defined in
     2. It has control over it’s own data 
     3. It can be deployed independently without affecting other systems. 
     4. This allows the team to iterate and release features without the need of coordination or wait for system wide deployments. 
+<img width="1300" height="949" alt="Repository" src="https://github.com/user-attachments/assets/c1df2e4a-7cda-482b-9eab-7d1a3d2339ab" />
+<img width="1300" height="949" alt="Repository" src="https://github.com/user-attachments/assets/c1df2e4a-7cda-482b-9eab-7d1a3d2339ab" />
 
 
 ## Common Pitfalls in designing micro services. 
@@ -97,11 +95,14 @@ Application of loose coupling , clear separation of concerns and well defined in
 
 ## Best Practices in Micro-service Architecture. 
 
-* Use API -first approach - design and documenting the API contract first before coding 
+* Use API-first approach
+	* design and documenting the API contract first before coding 
     * Ensures clear understanding of service interactions and data exchange. 
     * Allows to identify the issues earlier 
     * Make informed decisions about the structure of the API 
-* using domain‑driven design to identify bounded context
+* using domain‑driven design (DDD)
+	*  DDD helps you identify bounded contexts, which are areas of your domain that have their own unique language and business rules.
+ 	*  By aligning your microservices with these bounded contexts, you ensure that each service has a clear responsibility and avoids unnecessary coupling.
 *  ensuring Data Consistency through eventual consistency and event‑driven architectures
 *  handling cross‑coding concerns using API gateways
 * Design for failure with circuit breakers and fallback strategies
