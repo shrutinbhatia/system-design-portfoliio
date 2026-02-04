@@ -96,18 +96,90 @@ Application of loose coupling, clear separation of concerns and well defined int
  -  Partition Tolerance: The system continues to operate even when there are network partitions or failures
    In micro service architecture - partition tolerance is usually a must have. With services distributed across multiple nodes, network partitions and failures cannot be avoided,so we need to make a trade off between consistency and availability. 
 
-## Best Practices in Micro-service Architecture. 
+Best Practices in Micro-service Architecture. 
 
-* Use API-first approach
-	* design and documenting the API contract first before coding 
+* Use API -first approach - design and documenting the API contract first before coding 
     * Ensures clear understanding of service interactions and data exchange. 
     * Allows to identify the issues earlier 
     * Make informed decisions about the structure of the API 
-* using domain‑driven design (DDD)
-	*  DDD helps you identify bounded contexts, which are areas of your domain that have their own unique language and business rules.
- 	*  By aligning your microservices with these bounded contexts, you ensure that each service has a clear responsibility and avoids unnecessary coupling.
+* using domain‑driven design to identify bounded context
+    * DDD helps identify bounded context which 
 *  ensuring Data Consistency through eventual consistency and event‑driven architectures
-*  handling cross‑coding concerns using API gateways
+    * Data consistency is a challenge in a microservices architecture as each service typically has its own database. 
+    * This can lead to situations where data might be temporarily out of sync across services. 
+    * To mitigate this issue, you can employ eventual consistency and event‑driven architectures. For example, when a service updates its data, it can publish an event that other services can listen to and react accordingly. 
+*  Handling cross‑cutting concerns using API gateways
+    * When it comes to cross‑cutting concerns like security and logging, cannot be implemented individually as this can lead to duplication and inconsistency. 
+    * It’s better to use a centralised approach with an API gateway. API gateways act as a single entry point for  micro services, handling tasks like authentication and rate limiting.
+    *  While micro services aim for decentralisation and autonomy, centralising certain cross‑cutting concerns can provide a more consistent and manageable components. 
 * Design for failure with circuit breakers and fallback strategies
-*  versioning APIs to introduce changes without breaking existing clients. 
-* Centralise cross-cutting concerns 
+    *  failures are inevitable due to network issues or latency spikes that can disrupt the communication between services. 
+    * Implement retry mechanisms and fallback strategies helps handling such situations.
+    *  For example, if a service is experiencing issues, the consuming service can implement a retry mechanism to attempt reconnecting. If the issue persists, it can switch to a fallback strategy, such as using cache data or providing a degraded experience.
+    *  By designing for failure, you make your microservices more resilient and able to handle unexpected situations gracefully. 
+*  Versioning APIs to introduce changes without breaking existing clients. 
+    * New changes should be added to a new version so that existing clients can still operate on the current version. 
+    * New clients can use the new version directly 
+    * Existing clients can take time to move to new versions and the old version can be deprecated gradually 
+    * In APIs , it’s best to use the API version in the number /api/v1 and api/v2 or use them in headers. 
+
+
+
+## API Granularity 
+
+- Fine grained APIs 
+    - Exposes small and specific operations 
+    - Benefits: 
+        - high level of control and flexibility,
+        - Access and manipulate specific resources
+        - Perform precise operations.
+    - Drawbacks : 
+        - Increased network calls 
+        - Higher volume of data transfer
+        -  Complexity in managing and orchestrating interactions between services 
+- Coarse grained APIs
+    * Exposes larger, more complex operations
+    * Benefits - 
+        * Reduced network overhead 
+        * Simplified service interaction 
+        * Larger chunks of functionality 
+    * Drawbacks 
+        * Tight coupling between services 
+        * Reduces Flexibility in client interactions. 
+
+### Using Bounded Context from DDD. 
+
+* A bounded context defines the limits of a specific domain, including its entities, behaviours, and rules.
+* It helps organise the development of micro-services by clearly separating different domains of the application.
+* A single bounced context can contain one or more micro services. 
+* They guide granularity of the APIs. 
+* A bounded context should have its own API to encapsulate functionalities and data.
+* The granularity of the API should be determined by the cohesion within the context and the desire of loose coupling between contexts.  
+* If a piece of information is not directly needed , keep it internal. Abstract it within API boundary 
+
+<img width="3437" height="2486" alt="Pasted Graphic 3" src="https://github.com/user-attachments/assets/3a54ddcf-8fd6-4047-9125-baa4aa72a8c9" />
+
+
+￼
+###  Choosing the correct level of granularity
+ Too many microservices = 
+- increased operational complexity,
+-  more network overhead
+-  more potential points of failure. 
+- 
+  Overly coarse‑grained APIs =  
+- can create mini monolith
+-  Harder to understand, change, and maintain over time
+-  can lead to tighter coupling between services. 
+  
+  The key is to find the right level of granularity for your specific context and requirements, considering factors such as the 
+- team structure
+-  rate of change of different parts of the system
+-  performance requirements
+-  Overall domain complexity
+  
+  
+- “Designing for change” from the beginning is important, creating APIs and service boundaries that are as stable as possible even if the internal implementation details change. 
+- When adjusting bounded contexts, merging them is generally easier than splitting them apart.
+- Splitting a context requires careful planning and coordination, possibly using a facade or a gateway to present a consistent interface to clients during the transition.
+
